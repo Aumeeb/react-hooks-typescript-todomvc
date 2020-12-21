@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import Header from './Header'
+import Header, { HeaderProps } from './Header'
+import List from './List'
 
 const Title = styled.div`
   background: -webkit-linear-gradient(-70deg, #a2facf, #64acff);
@@ -8,15 +9,39 @@ const Title = styled.div`
   font-size: 2em;
   font-weight: 900;
 `
-
-interface TodoPageProps {
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 30vw;
+  text-align: center;
+`
+interface TodoPageProps extends HeaderProps {
   title?: string
 }
 export default (props: TodoPageProps) => {
   return (
-    <div>
+    <Wrapper>
       <Title>{props.title ?? 'Todo List'}</Title>
-      <Header></Header>
-    </div>
+      <Header selectIcon={props.selectIcon} textHint={props.textHint}></Header>
+      <List
+        items={[
+          {
+            isHover: false,
+            isEdit: false,
+            done: true,
+            uuid: '1',
+            text: '123123',
+          },
+          {
+            isHover: false,
+            isEdit: false,
+            done: false,
+            uuid: '1',
+            text: '31232131',
+          },
+        ]}
+      />
+    </Wrapper>
   )
 }
