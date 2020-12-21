@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import { Flex } from '..'
+import Footer from './Footer'
 import Header, { HeaderProps } from './Header'
 import List from './List'
 
@@ -9,8 +11,7 @@ const Title = styled.div`
   font-size: 2em;
   font-weight: 900;
 `
-const Wrapper = styled.div`
-  display: flex;
+const Wrapper = styled(Flex)`
   flex-direction: column;
   margin: auto;
   width: 30vw;
@@ -42,6 +43,7 @@ export default (props: TodoPageProps) => {
           },
         ]}
       />
+      <Footer />
     </Wrapper>
   )
 }

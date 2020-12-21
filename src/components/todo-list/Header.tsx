@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
+import { Flex } from '..'
 
-const SearchPanel = styled.header`
-  display: flex;
+const SearchPanel = styled(Flex)`
   align-items: center;
   justify-content: center;
 `
@@ -25,7 +25,10 @@ const Header: FC<HeaderProps> = props => {
   return (
     <SearchPanel>
       <SelectIcon>{selectIcon ?? '🉑'}</SelectIcon>
-      <Input type="text" placeholder={props.textHint ?? ''} />
+      <Input
+        type="text"
+        placeholder={props.textHint ?? 'What you want to do next?'}
+      />
     </SearchPanel>
   )
 }
