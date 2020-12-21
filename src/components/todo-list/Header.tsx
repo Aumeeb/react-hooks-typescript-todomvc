@@ -2,10 +2,17 @@ import React, { FC } from 'react'
 import styled from 'styled-components'
 
 const SearchPanel = styled.header`
-  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 const SelectIcon = styled.span`
   padding: 10px;
+  font-size: 2em;
+`
+const Input = styled.input`
+  width: 50%;
+  height: 40px;
 `
 export interface HeaderProps {
   textHint?: string
@@ -17,9 +24,8 @@ const Header: FC<HeaderProps> = props => {
 
   return (
     <SearchPanel>
-      <SelectIcon>{selectIcon ?? '🐷'}</SelectIcon>
-      <input type="text" placeholder={props.textHint ?? ''} />
-      
+      <SelectIcon>{selectIcon ?? '🉑'}</SelectIcon>
+      <Input type="text" placeholder={props.textHint ?? ''} />
     </SearchPanel>
   )
 }
