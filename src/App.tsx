@@ -1,12 +1,12 @@
-import React from "react";
-import TodoListPage from "./pages/TodoListPage";
+import React from 'react'
+import TodoListPage from './pages/TodoListPage'
 
 function App() {
   return (
     <div>
       <TodoListPage />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
