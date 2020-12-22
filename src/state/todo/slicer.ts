@@ -1,4 +1,4 @@
-import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ItemProps } from '../../components/todo-list/List'
 import { shortId, ShortUniqueId } from '../../utils/gen'
 

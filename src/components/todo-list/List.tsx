@@ -46,18 +46,24 @@ const List: FC<MenuProps> = props => {
       {props?.items.map(item => (
         <li
           key={shortId()}
-          onMouseEnter={e => {
-            let newItems = { ...item }
-            newItems.isHover = true
-            updateItem(newItems)
-          }}
-          onMouseOut={e => {
-            let newItems = { ...item }
-            newItems.isHover = false
-            updateItem(newItems)
-          }}
+          // onMouseEnter={e => {
+          //   let newItems = { ...item }
+          //   newItems.isHover = true
+          //   updateItem(newItems)
+          // }}
+          // onMouseOut={e => {
+          //   let newItems = { ...item }
+          //   newItems.isHover = false
+          //   updateItem(newItems)
+          // }}
         >
-          <ToggleTaskButton>{item.done ? '✔️' : ''} </ToggleTaskButton>
+          <ToggleTaskButton
+            onClick={() => {
+              updateItem({ ...item, done: !item.done })
+            }}
+          >
+            {item.done ? '✔️' : ''}{' '}
+          </ToggleTaskButton>
           <span>{item.text}</span>
           {!!item.isHover && (
             <RemoveButton
