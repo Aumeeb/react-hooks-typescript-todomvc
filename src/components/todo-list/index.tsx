@@ -14,7 +14,7 @@ const Title = styled.div`
 const Wrapper = styled(Flex)`
   flex-direction: column;
   margin: auto;
-  width: 30vw;
+  width: 40vw;
   text-align: center;
 `
 interface TodoPageProps extends HeaderProps {

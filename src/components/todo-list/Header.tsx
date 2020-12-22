@@ -17,6 +17,8 @@ const Input = styled.input`
 export interface HeaderProps {
   textHint?: string
   selectIcon?: string
+  onSave: (val: string) => void
+  
 }
 
 const Header: FC<HeaderProps> = props => {

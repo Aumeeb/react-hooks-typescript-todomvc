@@ -4,6 +4,7 @@ import styled from 'styled-components'
 const TodoListUL = styled.ul`
   list-style: none;
   padding: 0;
+  margin:0;
   > li {
     padding: 15px;
     border: 1px solid gray;
