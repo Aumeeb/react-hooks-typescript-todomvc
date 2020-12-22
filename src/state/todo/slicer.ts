@@ -12,14 +12,14 @@ const initialState: SliceState = {
       isEdit: false,
       done: true,
       uuid: '1',
-      text: '123123',
+      text: 'Project outline shoud be done in 3 hours',
     },
     {
       isHover: false,
       isEdit: false,
       done: false,
       uuid: '1',
-      text: '31232131',
+      text: 'I wanto go to Mars',
     },
   ],
 }
