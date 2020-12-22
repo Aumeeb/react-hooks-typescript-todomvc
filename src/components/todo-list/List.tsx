@@ -39,7 +39,7 @@ export interface ItemProps {
   done: boolean
   isHover: boolean
   isEdit: boolean
-  uuid: string
+  id: string
   text: string
   visible: boolean
 }
@@ -55,10 +55,10 @@ const List: FC<MenuProps> = props => {
   return (
     <TodoListUL>
       {props?.items.map(
-        item =>
+        (item, idx) =>
           item.visible && (
             <li
-              key={shortId()}
+              key={item.id}
               // onMouseEnter={e => {
               //   let newItems = { ...item }
               //   newItems.isHover = true
@@ -82,7 +82,7 @@ const List: FC<MenuProps> = props => {
               {!!item.isHover && (
                 <RemoveButton
                   onClick={() => {
-                    removeItem(item.uuid)
+                    removeItem(item.id)
                   }}
                 >
                   ❌

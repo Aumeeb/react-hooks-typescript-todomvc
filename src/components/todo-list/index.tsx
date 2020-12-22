@@ -47,7 +47,7 @@ export default (props: TodoPageProps) => {
             isHover: false,
             isEdit: false,
             done: false,
-            uuid: shortId(),
+            id: shortId(),
             text: value,
             visible: true,
           })

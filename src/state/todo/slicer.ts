@@ -20,7 +20,7 @@ const initialState: SliceState = {
       isHover: false,
       isEdit: false,
       done: true,
-      uuid: shortId(),
+      id: shortId(),
       text: 'Project outline shoud be done in 3 hours',
       visible: true,
     },
@@ -34,13 +34,13 @@ export const todoSlice = createSlice({
       state.items.push(action.payload)
     },
     remove: (state, action: PayloadAction<ShortUniqueId>) => {
-      state.items = state.items.filter(item => item.uuid !== action.payload)
+      state.items = state.items.filter(item => item.id !== action.payload)
     },
     removeFinished: state => {
       state.items = state.items.filter(item => !item.done)
     },
     toggle: (state, action: PayloadAction<ItemProps>) => {
-      let found = state.items.find(item => item.uuid === action.payload.uuid)
+      let found = state.items.find(item => item.id === action.payload.id)
       if (found) {
         found.done = !found.done
       }
@@ -88,7 +88,7 @@ export const todoSlice = createSlice({
       state.isAllFinish = state.items.every(item => item.done)
     },
     updateItem: (state, action: PayloadAction<ItemProps>) => {
-      const idx = state.items.findIndex(p => p.uuid === action.payload.uuid)
+      const idx = state.items.findIndex(p => p.id === action.payload.id)
       state.items[idx] = action.payload
     },
   },
