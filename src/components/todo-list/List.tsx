@@ -22,14 +22,14 @@ const ToggleTaskButton = styled.span`
 const RemoveButton = styled.span`
   margin-left: auto;
 `
-interface ItemProps {
+export interface ItemProps {
   done: boolean
   isHover: boolean
   isEdit: boolean
   uuid: string
   text: string
 }
-interface MenuProps {
+export interface MenuProps {
   items: ItemProps[]
 }
 const List: FC<MenuProps> = props => {

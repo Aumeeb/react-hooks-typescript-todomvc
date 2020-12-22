@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import { Flex } from '..'
+import { useTodoState } from '../../state/todo/hooks'
 import Footer from './Footer'
 import Header, { HeaderProps } from './Header'
 import List from './List'
@@ -23,29 +24,15 @@ interface TodoPageProps extends HeaderProps {
   isExpend?: boolean
 }
 export default (props: TodoPageProps) => {
-
+  const {items} = useTodoState()
   const [expend, setExpend] = useState(props.isExpend)
+
   return (
     <Wrapper>
       <Title>{props.title ?? 'Todo List'}</Title>
       <Header selectIcon={props.selectIcon} textHint={props.textHint}></Header>
       <List
-        items={[
-          {
-            isHover: false,
-            isEdit: false,
-            done: true,
-            uuid: '1',
-            text: '123123',
-          },
-          {
-            isHover: false,
-            isEdit: false,
-            done: false,
-            uuid: '1',
-            text: '31232131',
-          },
-        ]}
+        items={items}
       />
       <Footer />
     </Wrapper>
