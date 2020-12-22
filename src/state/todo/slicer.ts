@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { TaskProgress } from '../../components/todo-list/Footer'
 import { ItemProps } from '../../components/todo-list/List'
 import { shortId, ShortUniqueId } from '../../utils/gen'
 
@@ -16,6 +17,7 @@ const initialState: SliceState = {
       done: true,
       uuid: shortId(),
       text: 'Project outline shoud be done in 3 hours',
+      visible: true,
     },
   ],
 }
@@ -34,6 +36,20 @@ export const todoSlice = createSlice({
       if (found) {
         found.done = !found.done
       }
+    },
+    filter: (state, action: PayloadAction<TaskProgress>) => {
+      // switch (action.payload) {
+      //   case TaskProgress.Active:
+      //     state.items.filter(item => !item.done)
+      //     break
+      //   case TaskProgress.Finished:
+      //     state.items.filter(item => item.done)
+      //     break
+      //   case TaskProgress.All:
+      //     break
+      //   default:
+      //     return
+      // }
     },
     /**
      *  Set all items which have been finished or not finished

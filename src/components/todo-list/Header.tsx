@@ -16,6 +16,7 @@ const SearchPanel = styled(Flex)`
   justify-content: center;
 `
 const SelectIcon = styled.span<{ highlightIcon?: boolean }>`
+  cursor: pointer;
   padding: 10px;
   font-size: 2em;
   color: ${({ highlightIcon }) =>
@@ -35,7 +36,7 @@ export interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = ({
-  selectIcon = '🉑',
+  selectIcon = '可力可密',
   textHint = 'What you want to do next?',
   onIconClick = noop,
   onInsert = noop,

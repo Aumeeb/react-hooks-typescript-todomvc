@@ -31,6 +31,7 @@ export interface ItemProps {
   isEdit: boolean
   uuid: string
   text: string
+  visible: boolean
 }
 export interface MenuProps {
   items: ItemProps[]

@@ -2,23 +2,52 @@ import React, { FC } from 'react'
 import styled from 'styled-components'
 import { Flex } from '..'
 import { useTodoUnfnishedItems } from '../../state/todo/hooks'
+import { noop } from '../../utils/noop'
 
 const FlexStyles: React.CSSProperties = {
   justifyContent: 'space-between',
   padding: 15,
   border: '1px solid gray',
 }
+const PlainButton = styled.span`
+  cursor: pointer;
+`
+export enum TaskProgress {
+  Active = 1 << 0,
+  Finished = 1 << 1,
+  All = Active | Finished,
+}
 
-interface FooterProps {}
-const Footer: FC<FooterProps> = props => {
+export interface FooterProps {
+  filter?: (state: TaskProgress) => void
+}
+const Footer: FC<FooterProps> = ({ filter = noop }) => {
   const unfinishedItem = useTodoUnfnishedItems()
   return (
     <Flex style={FlexStyles}>
       <span> {unfinishedItem.length} items left</span>
-      <span>All</span>
-      <span>Active</span>
-      <span>Finished</span>
-      <span>Clear Finished</span>
+      <PlainButton
+        onClick={() => {
+          filter(TaskProgress.All)
+        }}
+      >
+        All
+      </PlainButton>
+      <PlainButton
+        onClick={() => {
+          filter(TaskProgress.Active)
+        }}
+      >
+        Active
+      </PlainButton>
+      <PlainButton
+        onClick={() => {
+          filter(TaskProgress.Finished)
+        }}
+      >
+        Finished
+      </PlainButton>
+      <PlainButton>Clear Finished</PlainButton>
     </Flex>
   )
 }

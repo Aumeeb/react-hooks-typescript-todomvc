@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { Flex } from '..'
 import { useTodoAdd, useTodoFinish, useTodoState } from '../../state/todo/hooks'
 import { shortId } from '../../utils/gen'
-import Footer from './Footer'
+import Footer, { FooterProps, TaskProgress } from './Footer'
 import Header, { HeaderProps } from './Header'
 import List from './List'
 
@@ -21,7 +21,7 @@ const Wrapper = styled(Flex)`
   width: 40vw;
   text-align: center;
 `
-interface TodoPageProps extends HeaderProps {
+interface TodoPageProps extends HeaderProps, FooterProps {
   title?: string
   isAllFinish?: boolean
 }
@@ -30,6 +30,18 @@ export default (props: TodoPageProps) => {
   const todoFinish = useTodoFinish()
   const { isAllFinish } = useTodoState()
   const { items } = useTodoState()
+  const memorizedFilter = useCallback((state: TaskProgress) => {
+    switch (state) {
+      case TaskProgress.Active:
+        break
+      case TaskProgress.Finished:
+        break
+      case TaskProgress.All:
+        break
+      default:
+        return
+    }
+  }, [])
   return (
     <Wrapper>
       <Title>{props.title ?? 'Todo List'}</Title>
@@ -42,6 +54,7 @@ export default (props: TodoPageProps) => {
             done: false,
             uuid: shortId(),
             text: value,
+            visible: true,
           })
         }}
         onIconClick={() => {
@@ -52,7 +65,7 @@ export default (props: TodoPageProps) => {
         textHint={props.textHint}
       ></Header>
       <List items={items} />
-      <Footer />
+      <Footer filter={memorizedFilter} />
     </Wrapper>
   )
 }
