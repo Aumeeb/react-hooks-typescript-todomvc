@@ -1,10 +1,11 @@
 import { FC } from 'react'
 import styled from 'styled-components'
+import { useTodoRemove, useTodoUpdateItem } from '../../state/todo/hooks'
 
 const TodoListUL = styled.ul`
   list-style: none;
   padding: 0;
-  margin:0;
+  margin: 0;
   > li {
     padding: 15px;
     border: 1px solid gray;
@@ -33,13 +34,33 @@ export interface MenuProps {
   items: ItemProps[]
 }
 const List: FC<MenuProps> = props => {
+  const updateItem = useTodoUpdateItem()
+  const removeItem = useTodoRemove()
   return (
     <TodoListUL>
       {props?.items.map(item => (
-        <li>
+        <li
+          onMouseEnter={() => {
+            const newItems = { ...item }
+            newItems.isHover = true
+            updateItem(newItems)
+            console.log(item)
+          }}
+          onMouseOut={() => {
+            console.log(item)
+          }}
+        >
           <ToggleTaskButton>{item.done ? '✔️' : ''} </ToggleTaskButton>
           <span>{item.text}</span>
-          <RemoveButton>❌</RemoveButton>
+          {!!item.isHover && (
+            <RemoveButton
+              onClick={() => {
+                removeItem(item.uuid)
+              }}
+            >
+              ❌
+            </RemoveButton>
+          )}
         </li>
       ))}
     </TodoListUL>

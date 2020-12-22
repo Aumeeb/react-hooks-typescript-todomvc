@@ -9,7 +9,8 @@ import {
   useTodoFinish,
   useTodoState,
 } from '../../state/todo/hooks'
-import { runInContext } from 'vm'
+import { shortId } from '../../utils/gen'
+
 const SearchPanel = styled(Flex)`
   align-items: center;
   justify-content: center;
@@ -63,12 +64,12 @@ const Header: FC<HeaderProps> = ({
           setValue(e.target.value)
         }}
         onKeyUp={ev => {
-          if (supportKey(ev.key)) {
+          if (supportKey(ev.key) && value.trim() !== '') {
             add({
               isHover: false,
               isEdit: false,
-              done: true,
-              uuid: '1',
+              done: false,
+              uuid: shortId(),
               text: value,
             })
             setValue('')

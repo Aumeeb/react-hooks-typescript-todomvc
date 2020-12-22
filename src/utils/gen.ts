@@ -1,4 +1,4 @@
-type ShortUniqueId = string
+export type ShortUniqueId = string
 
 /**
  * To generate short unique id such as `vte9ig` `vs89l1` with 6 lengths

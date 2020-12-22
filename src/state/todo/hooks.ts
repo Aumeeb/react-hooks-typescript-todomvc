@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useCallback, useMemo } from 'react'
 import { todoSlice } from './slicer'
 import type { ItemProps as TodoItemProps } from '../../components/todo-list/List'
+import { ShortUniqueId } from '../../utils/gen'
 
-const { add, finish, syncTaskProcess } = todoSlice.actions
+const { add, remove, finish, syncTaskProcess, updateItem } = todoSlice.actions
 export function useTodoState(): AppState['todo'] {
   return useSelector<AppState, AppState['todo']>(state => state.todo)
 }
@@ -33,4 +34,14 @@ export function useTodoFinish() {
 export function useSyncTaskProcess() {
   const dispatch = useDispatch()
   return useCallback(() => dispatch(syncTaskProcess()), [dispatch])
+}
+export function useTodoUpdateItem() {
+  const dispatch = useDispatch()
+  return useCallback((item: TodoItemProps) => dispatch(updateItem(item)), [
+    dispatch,
+  ])
+}
+export function useTodoRemove() {
+  const dispatch = useDispatch()
+  return useCallback((id: ShortUniqueId) => dispatch(remove(id)), [dispatch])
 }
