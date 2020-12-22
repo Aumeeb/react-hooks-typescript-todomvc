@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
 import { ItemProps } from '../../components/todo-list/List'
 import { shortId, ShortUniqueId } from '../../utils/gen'
 
@@ -46,7 +45,6 @@ export const todoSlice = createSlice({
         found.done = !found.done
       }
     },
-
     filter: (state, action: PayloadAction<TaskProgress>) => {
       switch (action.payload) {
         case TaskProgress.Active:
@@ -77,8 +75,6 @@ export const todoSlice = createSlice({
     /**
      *  Set all items which have been finished or not finished
      *  default value is `true`
-     * @param state
-     * @param action
      */
     finish: (state, action: PayloadAction<boolean>) => {
       if (action.payload === true) {

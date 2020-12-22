@@ -8,7 +8,7 @@ import {
   useTodoState,
 } from '../../state/todo/hooks'
 import { shortId } from '../../utils/gen'
-import Footer, { FooterProps, TaskProgress } from './Footer'
+import Footer, { FooterProps } from './Footer'
 import Header, { HeaderProps } from './Header'
 import List from './List'
 

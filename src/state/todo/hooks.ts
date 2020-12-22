@@ -1,5 +1,4 @@
 import { AppState } from '..'
-
 import { useDispatch, useSelector } from 'react-redux'
 import { useCallback, useMemo } from 'react'
 import { ShortUniqueId } from '../../utils/gen'
@@ -38,7 +37,6 @@ export function useTodoFinish() {
     dispatch,
   ])
 }
-
 /**
  * Update property `isAllFinish`of `Todo` which depends on  all the tasks that have been done.
  */
