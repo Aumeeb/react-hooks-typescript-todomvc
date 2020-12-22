@@ -44,39 +44,42 @@ const List: FC<MenuProps> = props => {
 
   return (
     <TodoListUL>
-      {props?.items.map(item => (
-        <li
-          key={shortId()}
-          // onMouseEnter={e => {
-          //   let newItems = { ...item }
-          //   newItems.isHover = true
-          //   updateItem(newItems)
-          // }}
-          // onMouseOut={e => {
-          //   let newItems = { ...item }
-          //   newItems.isHover = false
-          //   updateItem(newItems)
-          // }}
-        >
-          <ToggleTaskButton
-            onClick={() => {
-              updateItem({ ...item, done: !item.done })
-            }}
-          >
-            {item.done ? '✔️' : ''}{' '}
-          </ToggleTaskButton>
-          <span>{item.text}</span>
-          {!!item.isHover && (
-            <RemoveButton
-              onClick={() => {
-                removeItem(item.uuid)
-              }}
+      {props?.items.map(
+        item =>
+          item.visible && (
+            <li
+              key={shortId()}
+              // onMouseEnter={e => {
+              //   let newItems = { ...item }
+              //   newItems.isHover = true
+              //   updateItem(newItems)
+              // }}
+              // onMouseOut={e => {
+              //   let newItems = { ...item }
+              //   newItems.isHover = false
+              //   updateItem(newItems)
+              // }}
             >
-              ❌
-            </RemoveButton>
-          )}
-        </li>
-      ))}
+              <ToggleTaskButton
+                onClick={() => {
+                  updateItem({ ...item, done: !item.done })
+                }}
+              >
+                {item.done ? '✔️' : ''}{' '}
+              </ToggleTaskButton>
+              <span>{item.text}</span>
+              {!!item.isHover && (
+                <RemoveButton
+                  onClick={() => {
+                    removeItem(item.uuid)
+                  }}
+                >
+                  ❌
+                </RemoveButton>
+              )}
+            </li>
+          )
+      )}
     </TodoListUL>
   )
 }

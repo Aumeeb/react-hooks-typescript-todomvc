@@ -17,7 +17,9 @@ export enum TaskProgress {
   Finished = 1 << 1,
   All = Active | Finished,
 }
+// export const TaskProgress ={
 
+// }
 export interface FooterProps {
   filter?: (state: TaskProgress) => void
 }

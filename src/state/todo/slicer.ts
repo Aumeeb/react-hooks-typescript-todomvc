@@ -1,8 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { TaskProgress } from '../../components/todo-list/Footer'
+
 import { ItemProps } from '../../components/todo-list/List'
 import { shortId, ShortUniqueId } from '../../utils/gen'
 
+// 这里有一个引用bug 无法导入 todo-list/Footer.tsx/  export enum TaskProgress
+enum TaskProgress {
+  Active = 1 << 0,
+  Finished = 1 << 1,
+  All = Active | Finished,
+}
 type SliceState = {
   isAllFinish: boolean
   items: ItemProps[]
@@ -38,18 +44,31 @@ export const todoSlice = createSlice({
       }
     },
     filter: (state, action: PayloadAction<TaskProgress>) => {
-      // switch (action.payload) {
-      //   case TaskProgress.Active:
-      //     state.items.filter(item => !item.done)
-      //     break
-      //   case TaskProgress.Finished:
-      //     state.items.filter(item => item.done)
-      //     break
-      //   case TaskProgress.All:
-      //     break
-      //   default:
-      //     return
-      // }
+      switch (action.payload) {
+        case TaskProgress.Active:
+          state.items.forEach(item => {
+            if (!item.done) {
+              item.visible = true
+            } else {
+              item.visible = false
+            }
+          })
+          break
+
+        case TaskProgress.Finished:
+          state.items.forEach(item => {
+            if (item.done) {
+              item.visible = true
+            } else {
+              item.visible = false
+            }
+          })
+          break
+        case TaskProgress.All:
+          state.items.forEach(item => {
+            item.visible = true
+          })
+      }
     },
     /**
      *  Set all items which have been finished or not finished

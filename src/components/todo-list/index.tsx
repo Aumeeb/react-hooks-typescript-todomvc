@@ -1,7 +1,12 @@
 import { useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { Flex } from '..'
-import { useTodoAdd, useTodoFinish, useTodoState } from '../../state/todo/hooks'
+import {
+  useTodoAdd,
+  useTodoFilter,
+  useTodoFinish,
+  useTodoState,
+} from '../../state/todo/hooks'
 import { shortId } from '../../utils/gen'
 import Footer, { FooterProps, TaskProgress } from './Footer'
 import Header, { HeaderProps } from './Header'
@@ -29,19 +34,12 @@ export default (props: TodoPageProps) => {
   const add = useTodoAdd()
   const todoFinish = useTodoFinish()
   const { isAllFinish } = useTodoState()
+  const filter = useTodoFilter()
   const { items } = useTodoState()
-  const memorizedFilter = useCallback((state: TaskProgress) => {
-    switch (state) {
-      case TaskProgress.Active:
-        break
-      case TaskProgress.Finished:
-        break
-      case TaskProgress.All:
-        break
-      default:
-        return
-    }
-  }, [])
+  const memorizedFilter = useCallback(
+    (state: TaskProgress) => filter(state),
+    []
+  )
   return (
     <Wrapper>
       <Title>{props.title ?? 'Todo List'}</Title>

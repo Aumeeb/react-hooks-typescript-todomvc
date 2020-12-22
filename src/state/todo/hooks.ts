@@ -1,11 +1,20 @@
 import { AppState } from '..'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { useCallback, useMemo } from 'react'
+import { ShortUniqueId } from '../../utils/gen'
+import { TaskProgress } from '../../components/todo-list/Footer'
 import { todoSlice } from './slicer'
 import type { ItemProps as TodoItemProps } from '../../components/todo-list/List'
-import { ShortUniqueId } from '../../utils/gen'
 
-const { add, remove, finish, syncTaskProcess, updateItem } = todoSlice.actions
+const {
+  add,
+  remove,
+  finish,
+  syncTaskProcess,
+  updateItem,
+  filter,
+} = todoSlice.actions
 export function useTodoState(): AppState['todo'] {
   return useSelector<AppState, AppState['todo']>(state => state.todo)
 }
@@ -45,4 +54,12 @@ export function useTodoUpdateItem() {
 export function useTodoRemove() {
   const dispatch = useDispatch()
   return useCallback((id: ShortUniqueId) => dispatch(remove(id)), [dispatch])
+}
+
+export function useTodoFilter() {
+  const dispatch = useDispatch()
+  return useCallback(
+    (taskProgress: TaskProgress) => dispatch(filter(taskProgress)),
+    [dispatch]
+  )
 }
