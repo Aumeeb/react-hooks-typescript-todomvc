@@ -22,8 +22,9 @@ export enum TaskProgress {
 // }
 export interface FooterProps {
   filter?: (state: TaskProgress) => void
+  onClearFinished?: () => void
 }
-const Footer: FC<FooterProps> = ({ filter = noop }) => {
+const Footer: FC<FooterProps> = ({ filter = noop, onClearFinished = noop }) => {
   const unfinishedItem = useTodoUnfnishedItems()
   return (
     <Flex style={FlexStyles}>
@@ -49,7 +50,7 @@ const Footer: FC<FooterProps> = ({ filter = noop }) => {
       >
         Finished
       </PlainButton>
-      <PlainButton>Clear Finished</PlainButton>
+      <PlainButton onClick={onClearFinished}>Clear Finished</PlainButton>
     </Flex>
   )
 }

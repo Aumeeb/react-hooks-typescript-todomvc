@@ -37,12 +37,16 @@ export const todoSlice = createSlice({
     remove: (state, action: PayloadAction<ShortUniqueId>) => {
       state.items = state.items.filter(item => item.uuid !== action.payload)
     },
+    removeFinished: state => {
+      state.items = state.items.filter(item => !item.done)
+    },
     toggle: (state, action: PayloadAction<ItemProps>) => {
       let found = state.items.find(item => item.uuid === action.payload.uuid)
       if (found) {
         found.done = !found.done
       }
     },
+
     filter: (state, action: PayloadAction<TaskProgress>) => {
       switch (action.payload) {
         case TaskProgress.Active:

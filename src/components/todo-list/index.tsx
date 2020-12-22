@@ -1,10 +1,10 @@
-import { useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { Flex } from '..'
 import {
   useTodoAdd,
   useTodoFilter,
   useTodoFinish,
+  useTodoRemoveFinished,
   useTodoState,
 } from '../../state/todo/hooks'
 import { shortId } from '../../utils/gen'
@@ -33,13 +33,10 @@ interface TodoPageProps extends HeaderProps, FooterProps {
 export default (props: TodoPageProps) => {
   const add = useTodoAdd()
   const todoFinish = useTodoFinish()
+  const removeFinished = useTodoRemoveFinished()
   const { isAllFinish } = useTodoState()
   const filter = useTodoFilter()
   const { items } = useTodoState()
-  const memorizedFilter = useCallback(
-    (state: TaskProgress) => filter(state),
-    []
-  )
   return (
     <Wrapper>
       <Title>{props.title ?? 'Todo List'}</Title>
@@ -63,7 +60,7 @@ export default (props: TodoPageProps) => {
         textHint={props.textHint}
       ></Header>
       <List items={items} />
-      <Footer filter={memorizedFilter} />
+      <Footer filter={filter} onClearFinished={removeFinished} />
     </Wrapper>
   )
 }

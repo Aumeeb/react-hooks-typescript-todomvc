@@ -10,6 +10,7 @@ import type { ItemProps as TodoItemProps } from '../../components/todo-list/List
 const {
   add,
   remove,
+  removeFinished,
   finish,
   syncTaskProcess,
   updateItem,
@@ -55,7 +56,10 @@ export function useTodoRemove() {
   const dispatch = useDispatch()
   return useCallback((id: ShortUniqueId) => dispatch(remove(id)), [dispatch])
 }
-
+export function useTodoRemoveFinished() {
+  const dispatch = useDispatch()
+  return useCallback(() => dispatch(removeFinished()), [dispatch])
+}
 export function useTodoFilter() {
   const dispatch = useDispatch()
   return useCallback(
