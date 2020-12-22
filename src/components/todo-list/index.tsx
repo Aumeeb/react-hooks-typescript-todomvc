@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import styled from 'styled-components'
 import { Flex } from '..'
 import Footer from './Footer'
@@ -19,8 +20,11 @@ const Wrapper = styled(Flex)`
 `
 interface TodoPageProps extends HeaderProps {
   title?: string
+  isExpend?: boolean
 }
 export default (props: TodoPageProps) => {
+
+  const [expend, setExpend] = useState(props.isExpend)
   return (
     <Wrapper>
       <Title>{props.title ?? 'Todo List'}</Title>

@@ -1,6 +1,7 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import styled from 'styled-components'
 import { Flex } from '..'
+import { noop } from '../../utils/noop'
 
 const SearchPanel = styled(Flex)`
   align-items: center;
@@ -17,20 +18,22 @@ const Input = styled.input`
 export interface HeaderProps {
   textHint?: string
   selectIcon?: string
-  onSave: (val: string) => void
-  
+  /**The Event triggers when you are pressing key 'enter' */
+  onInsert?: (val: string) => void
+  onSelectAll?: <T>(items: T[]) => void
 }
 
-const Header: FC<HeaderProps> = props => {
-  const { selectIcon } = props
-
+const Header: FC<HeaderProps> = ({
+  onSelectAll = noop,
+  selectIcon = '🉑',
+  textHint = 'What you want to do next?',
+  
+}) => {
+  
   return (
     <SearchPanel>
-      <SelectIcon>{selectIcon ?? '🉑'}</SelectIcon>
-      <Input
-        type="text"
-        placeholder={props.textHint ?? 'What you want to do next?'}
-      />
+      <SelectIcon onClick={e => onSelectAll([])}>{selectIcon}</SelectIcon>
+      <Input type="text" placeholder={textHint} />
     </SearchPanel>
   )
 }
