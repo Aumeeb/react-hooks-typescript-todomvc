@@ -7,7 +7,7 @@ import Header, { HeaderProps } from './Header'
 import List from './List'
 
 const Title = styled.div`
-  background: -webkit-linear-gradient(-70deg, #a2facf, #64acff);
+  background: linear-gradient(-70deg, #a2facf, #64acff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 2em;
