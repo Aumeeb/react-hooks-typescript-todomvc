@@ -8,6 +8,7 @@ const FlexStyles: React.CSSProperties = {
   justifyContent: 'space-between',
   padding: 15,
   border: '1px solid gray',
+  borderRadius: 8,
 }
 const PlainButton = styled.span`
   cursor: pointer;

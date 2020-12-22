@@ -18,6 +18,7 @@ const SelectIcon = styled.span<{ highlightIcon?: boolean }>`
 const Input = styled.input`
   width: 50%;
   height: 40px;
+  border-radius: 4px;
 `
 export interface HeaderProps {
   textHint?: string
@@ -29,7 +30,7 @@ export interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = ({
-  selectIcon = '可力可密',
+  selectIcon = '❄️',
   textHint = 'What you want to do next?',
   onIconClick = noop,
   onInsert = noop,

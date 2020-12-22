@@ -16,6 +16,12 @@ const TodoListUL = styled.ul`
     padding: 15px;
     border: 1px solid gray;
     display: flex;
+    background: linear-gradient(
+      100deg,
+      rgba(255, 255, 255, 0.8) 0%,
+      rgba(255, 255, 255, 0) 75%
+    );
+    border-radius: 8px;
   }
 `
 const ToggleTaskButton = styled.span`
