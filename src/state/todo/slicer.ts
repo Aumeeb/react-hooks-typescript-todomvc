@@ -2,10 +2,12 @@ import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ItemProps } from '../../components/todo-list/List'
 
 type SliceState = {
+  isAllFinish: boolean
   items: ItemProps[]
 }
 
 const initialState: SliceState = {
+  isAllFinish: false,
   items: [
     {
       isHover: false,
@@ -35,6 +37,23 @@ export const todoSlice = createSlice({
       if (found) {
         found.done = !found.done
       }
+    },
+    /**
+     *  Set all items which have been finished or not finished
+     *  default value is `true`
+     * @param state
+     * @param action
+     */
+    finish: (state, action: PayloadAction<boolean>) => {
+      if (action.payload === true) {
+        state.items.forEach(p => (p.done = true))
+      } else {
+        state.items.forEach(p => (p.done = false))
+      }
+      state.isAllFinish = state.items.every(item => item.done)
+    },
+    syncTaskProcess: state => {
+      state.isAllFinish = state.items.every(item => item.done)
     },
   },
 })

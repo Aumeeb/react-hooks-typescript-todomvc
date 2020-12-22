@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import { Flex } from '..'
-import { useTodoState } from '../../state/todo/hooks'
+import { useTodoFinish, useTodoState } from '../../state/todo/hooks'
 import Footer from './Footer'
 import Header, { HeaderProps } from './Header'
 import List from './List'
@@ -21,19 +21,22 @@ const Wrapper = styled(Flex)`
 `
 interface TodoPageProps extends HeaderProps {
   title?: string
-  isExpend?: boolean
+  isAllFinish?: boolean
 }
 export default (props: TodoPageProps) => {
-  const {items} = useTodoState()
-  const [expend, setExpend] = useState(props.isExpend)
+  const { items } = useTodoState()
+  const finish = useTodoFinish()
+  const [expend, setExpend] = useState(props.isAllFinish)
 
   return (
     <Wrapper>
       <Title>{props.title ?? 'Todo List'}</Title>
-      <Header selectIcon={props.selectIcon} textHint={props.textHint}></Header>
-      <List
-        items={items}
-      />
+      <Header
+        onSelectAll={finish}
+        selectIcon={props.selectIcon}
+        textHint={props.textHint}
+      ></Header>
+      <List items={items} />
       <Footer />
     </Wrapper>
   )
