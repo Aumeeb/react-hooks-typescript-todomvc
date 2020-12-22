@@ -1,6 +1,6 @@
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ItemProps } from '../../components/todo-list/List'
-import { ShortUniqueId } from '../../utils/gen'
+import { shortId, ShortUniqueId } from '../../utils/gen'
 
 type SliceState = {
   isAllFinish: boolean
@@ -14,15 +14,8 @@ const initialState: SliceState = {
       isHover: false,
       isEdit: false,
       done: true,
-      uuid: '1',
+      uuid: shortId(),
       text: 'Project outline shoud be done in 3 hours',
-    },
-    {
-      isHover: false,
-      isEdit: false,
-      done: false,
-      uuid: '1',
-      text: 'I wanto go to Mars',
     },
   ],
 }
