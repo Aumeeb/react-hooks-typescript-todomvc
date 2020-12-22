@@ -10,7 +10,8 @@ export function useTodoState(): AppState['todo'] {
   return useSelector<AppState, AppState['todo']>(state => state.todo)
 }
 export function useTodoItems() {
-  return useSelector<AppState>(state => state.todo.items)
+  const list = useSelector<AppState, TodoItemProps[]>(state => state.todo.items)
+  return useMemo(() => list.filter(item => !item.done), [list])
 }
 
 export function useTodoUnfnishedItems() {

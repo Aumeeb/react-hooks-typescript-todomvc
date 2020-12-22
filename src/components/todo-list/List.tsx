@@ -1,7 +1,9 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import styled from 'styled-components'
 import { useTodoRemove, useTodoUpdateItem } from '../../state/todo/hooks'
+import { shortId } from '../../utils/gen'
 
+let render = 0
 const TodoListUL = styled.ul`
   list-style: none;
   padding: 0;
@@ -34,20 +36,25 @@ export interface MenuProps {
   items: ItemProps[]
 }
 const List: FC<MenuProps> = props => {
+  console.log(++render)
+  useEffect(() => {}, [])
   const updateItem = useTodoUpdateItem()
   const removeItem = useTodoRemove()
+
   return (
     <TodoListUL>
       {props?.items.map(item => (
         <li
-          onMouseEnter={() => {
-            const newItems = { ...item }
+          key={shortId()}
+          onMouseEnter={e => {
+            let newItems = { ...item }
             newItems.isHover = true
             updateItem(newItems)
-            console.log(item)
           }}
-          onMouseOut={() => {
-            console.log(item)
+          onMouseOut={e => {
+            let newItems = { ...item }
+            newItems.isHover = false
+            updateItem(newItems)
           }}
         >
           <ToggleTaskButton>{item.done ? '✔️' : ''} </ToggleTaskButton>

@@ -1,16 +1,16 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import { Flex } from '..'
-import { useTodoFinish, useTodoState } from '../../state/todo/hooks'
+import { useTodoAdd, useTodoFinish, useTodoState } from '../../state/todo/hooks'
+import { shortId } from '../../utils/gen'
 import Footer from './Footer'
 import Header, { HeaderProps } from './Header'
 import List from './List'
 
-
 // -webkit- 标示删除后显示不出效果。故保留  浏览器 chrome 版本 87.0.4280.88（正式版本） (x86_64)
 const Title = styled.div`
   background: linear-gradient(-70deg, #a2facf, #64acff);
-  -webkit-background-clip: text;   
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 2em;
   font-weight: 900;
@@ -26,15 +26,28 @@ interface TodoPageProps extends HeaderProps {
   isAllFinish?: boolean
 }
 export default (props: TodoPageProps) => {
+  const add = useTodoAdd()
+  const todoFinish = useTodoFinish()
+  const { isAllFinish } = useTodoState()
   const { items } = useTodoState()
-  const finish = useTodoFinish()
-  const [expend, setExpend] = useState(props.isAllFinish)
-
   return (
     <Wrapper>
       <Title>{props.title ?? 'Todo List'}</Title>
       <Header
-        onSelectAll={finish}
+        highlightIcon={isAllFinish}
+        onInsert={value => {
+          add({
+            isHover: false,
+            isEdit: false,
+            done: false,
+            uuid: shortId(),
+            text: value,
+          })
+        }}
+        onIconClick={() => {
+          if (!!isAllFinish) todoFinish(false)
+          else todoFinish(true)
+        }}
         selectIcon={props.selectIcon}
         textHint={props.textHint}
       ></Header>

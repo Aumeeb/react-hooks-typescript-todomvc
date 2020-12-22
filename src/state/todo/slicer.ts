@@ -60,8 +60,8 @@ export const todoSlice = createSlice({
       state.isAllFinish = state.items.every(item => item.done)
     },
     updateItem: (state, action: PayloadAction<ItemProps>) => {
-      let found = state.items.find(item => item.uuid === action.payload.uuid)
-      found = action.payload
+      const idx = state.items.findIndex(p => p.uuid === action.payload.uuid)
+      state.items[idx] = action.payload
     },
   },
 })

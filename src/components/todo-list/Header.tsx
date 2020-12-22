@@ -15,10 +15,11 @@ const SearchPanel = styled(Flex)`
   align-items: center;
   justify-content: center;
 `
-const SelectIcon = styled.span<{ isAllFinish?: boolean }>`
+const SelectIcon = styled.span<{ highlightIcon?: boolean }>`
   padding: 10px;
   font-size: 2em;
-  color: ${({ isAllFinish }) => (isAllFinish === true ? '#61caca' : '#000')};
+  color: ${({ highlightIcon }) =>
+    highlightIcon === true ? '#61caca' : '#000'};
 `
 const Input = styled.input`
   width: 50%;
@@ -29,27 +30,29 @@ export interface HeaderProps {
   selectIcon?: string
   /**The Event triggers when you are pressing key 'enter' */
   onInsert?: (val: string) => void
-  onSelectAll?: (state: boolean) => void
+  onIconClick?: () => void
+  highlightIcon?: boolean
 }
 
 const Header: FC<HeaderProps> = ({
-  onSelectAll = noop,
   selectIcon = '🉑',
   textHint = 'What you want to do next?',
+  onIconClick = noop,
+  onInsert = noop,
+  highlightIcon = false,
 }) => {
-  const { isAllFinish, items } = useTodoState()
+  // const { isAllFinish } = useTodoState()
   const [value, setValue] = useState('')
-  const todoFinish = useTodoFinish()
-  const add = useTodoAdd()
-  console.log(isAllFinish, items)
+  // const todoFinish = useTodoFinish()
 
   return (
     <SearchPanel>
       <SelectIcon
-        isAllFinish={isAllFinish}
+        highlightIcon={highlightIcon}
         onClick={() => {
-          if (!!isAllFinish) todoFinish(false)
-          else todoFinish(true)
+          onIconClick()
+          // if (!!isAllFinish) todoFinish(false)
+          // else todoFinish(true)
         }}
       >
         {selectIcon}
@@ -60,18 +63,11 @@ const Header: FC<HeaderProps> = ({
         value={value}
         onChange={e => {
           console.log(e.target.value)
-
           setValue(e.target.value)
         }}
         onKeyUp={ev => {
           if (supportKey(ev.key) && value.trim() !== '') {
-            add({
-              isHover: false,
-              isEdit: false,
-              done: false,
-              uuid: shortId(),
-              text: value,
-            })
+            onInsert(value)
             setValue('')
           }
         }}
