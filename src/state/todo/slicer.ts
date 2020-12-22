@@ -30,5 +30,11 @@ export const todoSlice = createSlice({
     add: (state, action: PayloadAction<ItemProps>) => {
       state.items.push(action.payload)
     },
+    toggle: (state, action: PayloadAction<ItemProps>) => {
+      let found = state.items.find(item => item.uuid === action.payload.uuid)
+      if (found) {
+        found.done = !found.done
+      }
+    },
   },
 })
