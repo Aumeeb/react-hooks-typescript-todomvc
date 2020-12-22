@@ -6,9 +6,11 @@ import Footer from './Footer'
 import Header, { HeaderProps } from './Header'
 import List from './List'
 
+
+// -webkit- 标示删除后显示不出效果。故保留  浏览器 chrome 版本 87.0.4280.88（正式版本） (x86_64)
 const Title = styled.div`
   background: linear-gradient(-70deg, #a2facf, #64acff);
-  -webkit-background-clip: text;
+  -webkit-background-clip: text;   
   -webkit-text-fill-color: transparent;
   font-size: 2em;
   font-weight: 900;
