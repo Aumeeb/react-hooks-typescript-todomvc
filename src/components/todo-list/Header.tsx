@@ -1,15 +1,8 @@
-import React, { FC, useCallback, useState } from 'react'
+import React, { FC, useState } from 'react'
 import styled from 'styled-components'
 import { Flex } from '..'
 import { supportKey } from '../../utils/keyboard'
 import { noop } from '../../utils/noop'
-import {
-  useSyncTaskProcess,
-  useTodoAdd,
-  useTodoFinish,
-  useTodoState,
-} from '../../state/todo/hooks'
-import { shortId } from '../../utils/gen'
 
 const SearchPanel = styled(Flex)`
   align-items: center;
@@ -29,10 +22,10 @@ const Input = styled.input`
 export interface HeaderProps {
   textHint?: string
   selectIcon?: string
+  highlightIcon?: boolean
   /**The Event triggers when you are pressing key 'enter' */
   onInsert?: (val: string) => void
   onIconClick?: () => void
-  highlightIcon?: boolean
 }
 
 const Header: FC<HeaderProps> = ({
@@ -42,9 +35,7 @@ const Header: FC<HeaderProps> = ({
   onInsert = noop,
   highlightIcon = false,
 }) => {
-  // const { isAllFinish } = useTodoState()
   const [value, setValue] = useState('')
-  // const todoFinish = useTodoFinish()
 
   return (
     <SearchPanel>
@@ -52,8 +43,6 @@ const Header: FC<HeaderProps> = ({
         highlightIcon={highlightIcon}
         onClick={() => {
           onIconClick()
-          // if (!!isAllFinish) todoFinish(false)
-          // else todoFinish(true)
         }}
       >
         {selectIcon}

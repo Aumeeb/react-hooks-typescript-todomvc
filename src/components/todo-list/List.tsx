@@ -1,6 +1,10 @@
 import { FC, useEffect } from 'react'
 import styled from 'styled-components'
-import { useTodoRemove, useTodoUpdateItem } from '../../state/todo/hooks'
+import {
+  useSyncTaskProcess,
+  useTodoRemove,
+  useTodoUpdateItem,
+} from '../../state/todo/hooks'
 import { shortId } from '../../utils/gen'
 
 let render = 0
@@ -41,7 +45,7 @@ const List: FC<MenuProps> = props => {
   useEffect(() => {}, [])
   const updateItem = useTodoUpdateItem()
   const removeItem = useTodoRemove()
-
+  const sync = useSyncTaskProcess()
   return (
     <TodoListUL>
       {props?.items.map(
@@ -63,6 +67,7 @@ const List: FC<MenuProps> = props => {
               <ToggleTaskButton
                 onClick={() => {
                   updateItem({ ...item, done: !item.done })
+                  sync()
                 }}
               >
                 {item.done ? '✔️' : ''}{' '}
