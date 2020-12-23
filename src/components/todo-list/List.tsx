@@ -39,6 +39,7 @@ const RemoveButton = styled.span`
   cursor: pointer;
   margin-left: auto;
 `
+
 export interface ItemProps {
   done: boolean
   isHover: boolean
@@ -53,7 +54,9 @@ export interface MenuProps {
 }
 const List: FC<MenuProps> = props => {
   // console.log(++render, 'double render appears in React.Strict Mode')
-  useEffect(() => {}, [])
+  useEffect(() => {
+       
+  }, [])
   const updateItem = useTodoUpdateItem()
   const removeItem = useTodoRemove()
   const sync = useSyncTaskProcess()
@@ -99,8 +102,6 @@ const List: FC<MenuProps> = props => {
               ) : (
                 <Text
                   onDoubleClick={() => {
-                    console.log('clicked', item)
-
                     updateItem({ ...item, isEdit: true })
                   }}
                 >

@@ -30,12 +30,15 @@ export const todoSlice = createSlice({
   name: 'todo',
   initialState,
   reducers: {
+    /** Add a new record  */
     add: (state, action: PayloadAction<ItemProps>) => {
       state.items.push(action.payload)
     },
+    /** Remove a record which exist */
     remove: (state, action: PayloadAction<ShortUniqueId>) => {
       state.items = state.items.filter(item => item.id !== action.payload)
     },
+    /** Remove all record which have been done or finished  */
     removeFinished: state => {
       state.items = state.items.filter(item => !item.done)
     },
@@ -45,6 +48,7 @@ export const todoSlice = createSlice({
         found.done = !found.done
       }
     },
+    /** According to condiction set whether this record display or not */
     filter: (state, action: PayloadAction<TaskProgress>) => {
       switch (action.payload) {
         case TaskProgress.Active:
@@ -87,6 +91,7 @@ export const todoSlice = createSlice({
     syncTaskProcess: state => {
       state.isAllFinish = state.items.every(item => item.done)
     },
+    /** Update specific item of Array */
     updateItem: (state, action: PayloadAction<ItemProps>) => {
       const idx = state.items.findIndex(p => p.id === action.payload.id)
       state.items[idx] = action.payload
