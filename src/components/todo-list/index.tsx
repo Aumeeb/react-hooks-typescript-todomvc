@@ -6,7 +6,7 @@ import {
   useTodoFilter,
   useTodoFinish,
   useTodoRemoveFinished,
-  useTodoState,
+  useTodoState
 } from '../../state/todo/hooks'
 import { shortId } from '../../utils/gen'
 import Footer, { FooterProps } from './Footer'
@@ -50,7 +50,7 @@ export default (props: TodoPageProps) => {
             done: false,
             id: shortId(),
             text: value,
-            visible: true,
+            visible: true
           })
         }}
         onIconClick={() => {

@@ -4,7 +4,7 @@ import { useCallback, useMemo } from 'react'
 import { ShortUniqueId } from '../../utils/gen'
 import { TaskProgress } from '../../components/todo-list/Footer'
 import { todoSlice } from './slicer'
-import type { ItemProps as TodoItemProps } from '../../components/todo-list/List'
+import { ItemProps as TodoItemProps } from '../../components/todo-list/List'
 
 const {
   add,
@@ -14,7 +14,7 @@ const {
   syncTaskProcess,
   updateItem,
   resetItem,
-  filter,
+  filter
 } = todoSlice.actions
 export function useTodoState(): AppState['todo'] {
   return useSelector<AppState, AppState['todo']>(state => state.todo)
@@ -35,7 +35,7 @@ export function useTodoAdd() {
 export function useTodoFinish() {
   const dispatch = useDispatch()
   return useCallback((isFinish: boolean) => dispatch(finish(isFinish)), [
-    dispatch,
+    dispatch
   ])
 }
 /**
@@ -48,7 +48,7 @@ export function useSyncTaskProcess() {
 export function useTodoUpdateItem() {
   const dispatch = useDispatch()
   return useCallback((item: TodoItemProps) => dispatch(updateItem(item)), [
-    dispatch,
+    dispatch
   ])
 }
 export function useTodoRemove() {

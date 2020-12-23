@@ -4,7 +4,7 @@ import {
   useSyncTaskProcess,
   useTodoRemove,
   useTodoResetItems,
-  useTodoUpdateItem,
+  useTodoUpdateItem
 } from '../../state/todo/hooks'
 import { supportKey } from '../../utils/keyboard'
 
