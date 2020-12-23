@@ -33,8 +33,10 @@ const ToggleTaskButton = styled.span`
   border-radius: 50%;
   width: 25px;
   height: 25px;
+  cursor: pointer;
 `
 const RemoveButton = styled.span`
+  cursor: pointer;
   margin-left: auto;
 `
 export interface ItemProps {
@@ -59,14 +61,15 @@ const List: FC<MenuProps> = props => {
   return (
     <TodoListUL>
       {props?.items.map(
-        (item) =>
+        item =>
           item.visible && (
             <li
               key={item.id}
               onMouseEnter={() => {
                 updateItem({ ...item, isHover: true })
               }}
-              onMouseOut={() => {
+              onMouseLeave={() => {
+                console.log('mouse out inside tag li')
                 updateItem({ ...item, isHover: false })
               }}
             >
@@ -80,6 +83,7 @@ const List: FC<MenuProps> = props => {
               </ToggleTaskButton>
               {item.isEdit ? (
                 <input
+                  autoFocus
                   onBlur={() => {
                     updateItem({ ...item, isEdit: false })
                   }}
