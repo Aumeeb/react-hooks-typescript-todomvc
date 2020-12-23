@@ -62,7 +62,7 @@ const List: FC<MenuProps> = props => {
   const restItems = useTodoResetItems()
   useEffect(() => {
     restItems()
-  }, [])
+  }, [restItems])
   return (
     <TodoListUL>
       {props?.items.map(
