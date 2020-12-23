@@ -5,9 +5,11 @@ import {
   useTodoRemove,
   useTodoUpdateItem,
 } from '../../state/todo/hooks'
-import { shortId } from '../../utils/gen'
+import { supportKey } from '../../utils/keyboard'
 
-let render = 0
+const Text = styled.span`
+  display: inline-block;
+`
 const TodoListUL = styled.ul`
   list-style: none;
   padding: 0;
@@ -42,33 +44,31 @@ export interface ItemProps {
   id: string
   text: string
   visible: boolean
+  onTextDoubleClick?: (text: string) => void // 思考如何衡量 props 提升
 }
 export interface MenuProps {
   items: ItemProps[]
 }
 const List: FC<MenuProps> = props => {
-  console.log(++render, 'double render appears in React.Strict Mode')
+  // console.log(++render, 'double render appears in React.Strict Mode')
   useEffect(() => {}, [])
   const updateItem = useTodoUpdateItem()
   const removeItem = useTodoRemove()
   const sync = useSyncTaskProcess()
+
   return (
     <TodoListUL>
       {props?.items.map(
-        (item, idx) =>
+        (item) =>
           item.visible && (
             <li
               key={item.id}
-              // onMouseEnter={e => {
-              //   let newItems = { ...item }
-              //   newItems.isHover = true
-              //   updateItem(newItems)
-              // }}
-              // onMouseOut={e => {
-              //   let newItems = { ...item }
-              //   newItems.isHover = false
-              //   updateItem(newItems)
-              // }}
+              onMouseEnter={() => {
+                updateItem({ ...item, isHover: true })
+              }}
+              onMouseOut={() => {
+                updateItem({ ...item, isHover: false })
+              }}
             >
               <ToggleTaskButton
                 onClick={() => {
@@ -76,9 +76,34 @@ const List: FC<MenuProps> = props => {
                   sync()
                 }}
               >
-                {item.done ? '✔️' : ''}{' '}
+                {item.done ? '✔️' : ''}
               </ToggleTaskButton>
-              <span>{item.text}</span>
+              {item.isEdit ? (
+                <input
+                  onBlur={() => {
+                    updateItem({ ...item, isEdit: false })
+                  }}
+                  onKeyUp={ev => {
+                    if (supportKey(ev.key))
+                      updateItem({ ...item, isEdit: false })
+                  }}
+                  value={item.text}
+                  onChange={e => {
+                    updateItem({ ...item, text: e.target.value })
+                  }}
+                />
+              ) : (
+                <Text
+                  onDoubleClick={() => {
+                    console.log('clicked', item)
+
+                    updateItem({ ...item, isEdit: true })
+                  }}
+                >
+                  {item.text}
+                </Text>
+              )}
+
               {!!item.isHover && (
                 <RemoveButton
                   onClick={() => {
