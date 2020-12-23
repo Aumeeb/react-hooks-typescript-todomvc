@@ -30,7 +30,7 @@ export interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = ({
-  selectIcon = '❄️',
+  selectIcon = 'Click❄️',
   textHint = 'What you want to do next?',
   onIconClick = noop,
   onInsert = noop,

@@ -47,7 +47,7 @@ export interface MenuProps {
   items: ItemProps[]
 }
 const List: FC<MenuProps> = props => {
-  console.log(++render)
+  console.log(++render, 'double render appears in React.Strict Mode')
   useEffect(() => {}, [])
   const updateItem = useTodoUpdateItem()
   const removeItem = useTodoRemove()
