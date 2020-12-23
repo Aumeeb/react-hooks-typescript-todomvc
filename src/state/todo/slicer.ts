@@ -96,5 +96,14 @@ export const todoSlice = createSlice({
       const idx = state.items.findIndex(p => p.id === action.payload.id)
       state.items[idx] = action.payload
     },
+    /**
+     * Prevent browser crashes & shut down some of properties of item should be reset
+     */
+    resetItem: state => {
+      state.items.forEach(item => {
+        item.isEdit = false
+        item.isHover = false
+      })
+    },
   },
 })

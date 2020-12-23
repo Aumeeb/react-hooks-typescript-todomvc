@@ -13,6 +13,7 @@ const {
   finish,
   syncTaskProcess,
   updateItem,
+  resetItem,
   filter,
 } = todoSlice.actions
 export function useTodoState(): AppState['todo'] {
@@ -57,6 +58,10 @@ export function useTodoRemove() {
 export function useTodoRemoveFinished() {
   const dispatch = useDispatch()
   return useCallback(() => dispatch(removeFinished()), [dispatch])
+}
+export function useTodoResetItems() {
+  const dispatch = useDispatch()
+  return useCallback(() => dispatch(resetItem()), [dispatch])
 }
 export function useTodoFilter() {
   const dispatch = useDispatch()

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import {
   useSyncTaskProcess,
   useTodoRemove,
+  useTodoResetItems,
   useTodoUpdateItem,
 } from '../../state/todo/hooks'
 import { supportKey } from '../../utils/keyboard'
@@ -54,13 +55,14 @@ export interface MenuProps {
 }
 const List: FC<MenuProps> = props => {
   // console.log(++render, 'double render appears in React.Strict Mode')
-  useEffect(() => {
-       
-  }, [])
+
   const updateItem = useTodoUpdateItem()
   const removeItem = useTodoRemove()
   const sync = useSyncTaskProcess()
-
+  const restItems = useTodoResetItems()
+  useEffect(() => {
+    restItems()
+  }, [])
   return (
     <TodoListUL>
       {props?.items.map(
