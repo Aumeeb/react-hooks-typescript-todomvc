@@ -28,16 +28,17 @@ const Wrapper = styled(Flex)`
   text-align: center;
 `
 interface TodoPageProps extends HeaderProps, FooterProps {
-  title?: string
-  isAllFinish?: boolean
+  title: string
+  isAllFinish: boolean
 }
-export default (props: TodoPageProps) => {
+export default (props: Partial<TodoPageProps>) => {
   const add = useTodoAdd()
   const todoFinish = useTodoFinish()
   const removeFinished = useTodoRemoveFinished()
-  const {isAllFinish} = useTodoState()
   const filter = useTodoFilter()
+  const {isAllFinish} = useTodoState()
   const {items} = useTodoState()
+
   return (
     <Wrapper>
       <Title>{props.title ?? 'Todo List'}</Title>

@@ -1,7 +1,7 @@
 import React, {FC, useEffect} from 'react'
 import styled from 'styled-components'
 import {
-  useSyncTaskProcess,
+  useSyncTodoTaskProcess,
   useTodoRemove,
   useTodoResetItems,
   useTodoUpdateItem,
@@ -55,14 +55,14 @@ export interface MenuProps {
 }
 const List: FC<MenuProps> = (props) => {
   // console.log(++render, 'double render appears in React.Strict Mode')
-
   const updateItem = useTodoUpdateItem()
   const removeItem = useTodoRemove()
-  const sync = useSyncTaskProcess()
+  const sync = useSyncTodoTaskProcess()
   const restItems = useTodoResetItems()
   useEffect(() => {
     restItems()
   }, [restItems])
+
   return (
     <TodoListUL>
       {props?.items.map(

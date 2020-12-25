@@ -27,6 +27,7 @@ export interface FooterProps {
 }
 const Footer: FC<FooterProps> = ({filter = noop, onClearFinished = noop}) => {
   const unfinishedItem = useTodoUnfnishedItems()
+  
   return (
     <Flex style={FlexStyles}>
       <span> {unfinishedItem.length} items left</span>

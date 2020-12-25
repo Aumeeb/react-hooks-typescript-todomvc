@@ -39,7 +39,7 @@ export function useTodoFinish() {
 /**
  * Update property `isAllFinish`of `Todo` which depends on  all the tasks that have been done.
  */
-export function useSyncTaskProcess() {
+export function useSyncTodoTaskProcess() {
   const dispatch = useDispatch()
   return useCallback(() => dispatch(syncTaskProcess()), [dispatch])
 }
