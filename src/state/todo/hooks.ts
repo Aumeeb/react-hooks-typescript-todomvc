@@ -1,10 +1,10 @@
-import { AppState } from '..'
-import { useDispatch, useSelector } from 'react-redux'
-import { useCallback, useMemo } from 'react'
-import { ShortUniqueId } from '../../utils/gen'
-import { TaskProgress } from '../../components/todo-list/Footer'
-import { todoSlice } from './slicer'
-import { ItemProps as TodoItemProps } from '../../components/todo-list/List'
+import {AppState} from '..'
+import {useDispatch, useSelector} from 'react-redux'
+import {useCallback, useMemo} from 'react'
+import {ShortUniqueId} from '../../utils/gen'
+import {TaskProgress} from '../../components/todo-list/Footer'
+import {todoSlice} from './slicer'
+import {ItemProps as TodoItemProps} from '../../components/todo-list/List'
 
 const {
   add,
@@ -14,19 +14,19 @@ const {
   syncTaskProcess,
   updateItem,
   resetItem,
-  filter
+  filter,
 } = todoSlice.actions
 export function useTodoState(): AppState['todo'] {
-  return useSelector<AppState, AppState['todo']>(state => state.todo)
+  return useSelector<AppState, AppState['todo']>((state) => state.todo)
 }
 export function useTodoItems() {
-  const list = useSelector<AppState, TodoItemProps[]>(state => state.todo.items)
-  return useMemo(() => list.filter(item => !item.done), [list])
+  const list = useSelector<AppState, TodoItemProps[]>((state) => state.todo.items)
+  return useMemo(() => list.filter((item) => !item.done), [list])
 }
 
 export function useTodoUnfnishedItems() {
-  const list = useSelector<AppState, TodoItemProps[]>(state => state.todo.items)
-  return useMemo(() => list.filter(item => !item.done), [list])
+  const list = useSelector<AppState, TodoItemProps[]>((state) => state.todo.items)
+  return useMemo(() => list.filter((item) => !item.done), [list])
 }
 export function useTodoAdd() {
   const dispatch = useDispatch()
@@ -34,9 +34,7 @@ export function useTodoAdd() {
 }
 export function useTodoFinish() {
   const dispatch = useDispatch()
-  return useCallback((isFinish: boolean) => dispatch(finish(isFinish)), [
-    dispatch
-  ])
+  return useCallback((isFinish: boolean) => dispatch(finish(isFinish)), [dispatch])
 }
 /**
  * Update property `isAllFinish`of `Todo` which depends on  all the tasks that have been done.
@@ -47,9 +45,7 @@ export function useSyncTaskProcess() {
 }
 export function useTodoUpdateItem() {
   const dispatch = useDispatch()
-  return useCallback((item: TodoItemProps) => dispatch(updateItem(item)), [
-    dispatch
-  ])
+  return useCallback((item: TodoItemProps) => dispatch(updateItem(item)), [dispatch])
 }
 export function useTodoRemove() {
   const dispatch = useDispatch()
@@ -65,8 +61,7 @@ export function useTodoResetItems() {
 }
 export function useTodoFilter() {
   const dispatch = useDispatch()
-  return useCallback(
-    (taskProgress: TaskProgress) => dispatch(filter(taskProgress)),
-    [dispatch]
-  )
+  return useCallback((taskProgress: TaskProgress) => dispatch(filter(taskProgress)), [
+    dispatch,
+  ])
 }

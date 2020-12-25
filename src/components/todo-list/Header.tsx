@@ -1,19 +1,18 @@
-import React, { FC, useState } from 'react'
+import React, {FC, useState} from 'react'
 import styled from 'styled-components'
-import { Flex } from '..'
-import { supportKey } from '../../utils/keyboard'
-import { noop } from '../../utils/noop'
+import {Flex} from '..'
+import {supportKey} from '../../utils/keyboard'
+import {noop} from '../../utils/noop'
 
 const SearchPanel = styled(Flex)`
   align-items: center;
   justify-content: center;
 `
-const SelectIcon = styled.span<{ highlightIcon?: boolean }>`
+const SelectIcon = styled.span<{highlightIcon?: boolean}>`
   cursor: pointer;
   padding: 10px;
   font-size: 2em;
-  color: ${({ highlightIcon }) =>
-    highlightIcon === true ? '#61caca' : '#000'};
+  color: ${({highlightIcon}) => (highlightIcon === true ? '#61caca' : '#000')};
 `
 const Input = styled.input`
   width: 50%;
@@ -44,19 +43,18 @@ const Header: FC<HeaderProps> = ({
         highlightIcon={highlightIcon}
         onClick={() => {
           onIconClick()
-        }}
-      >
+        }}>
         {selectIcon}
       </SelectIcon>
       <Input
         type="text"
         placeholder={textHint}
         value={value}
-        onChange={e => {
+        onChange={(e) => {
           console.log(e.target.value)
           setValue(e.target.value)
         }}
-        onKeyUp={ev => {
+        onKeyUp={(ev) => {
           if (supportKey(ev.key) && value.trim() !== '') {
             onInsert(value)
             setValue('')

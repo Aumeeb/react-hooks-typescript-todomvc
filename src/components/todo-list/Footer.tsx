@@ -1,8 +1,8 @@
-import React, { FC } from 'react'
+import React, {FC} from 'react'
 import styled from 'styled-components'
-import { Flex } from '..'
-import { useTodoUnfnishedItems } from '../../state/todo/hooks'
-import { noop } from '../../utils/noop'
+import {Flex} from '..'
+import {useTodoUnfnishedItems} from '../../state/todo/hooks'
+import {noop} from '../../utils/noop'
 
 const FlexStyles: React.CSSProperties = {
   justifyContent: 'space-between',
@@ -25,7 +25,7 @@ export interface FooterProps {
   filter?: (state: TaskProgress) => void
   onClearFinished?: () => void
 }
-const Footer: FC<FooterProps> = ({ filter = noop, onClearFinished = noop }) => {
+const Footer: FC<FooterProps> = ({filter = noop, onClearFinished = noop}) => {
   const unfinishedItem = useTodoUnfnishedItems()
   return (
     <Flex style={FlexStyles}>
@@ -33,22 +33,19 @@ const Footer: FC<FooterProps> = ({ filter = noop, onClearFinished = noop }) => {
       <PlainButton
         onClick={() => {
           filter(TaskProgress.All)
-        }}
-      >
+        }}>
         All
       </PlainButton>
       <PlainButton
         onClick={() => {
           filter(TaskProgress.Active)
-        }}
-      >
+        }}>
         Active
       </PlainButton>
       <PlainButton
         onClick={() => {
           filter(TaskProgress.Finished)
-        }}
-      >
+        }}>
         Finished
       </PlainButton>
       <PlainButton onClick={onClearFinished}>Clear Finished</PlainButton>

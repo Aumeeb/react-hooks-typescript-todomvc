@@ -1,16 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Flex } from '..'
+import {Flex} from '..'
 import {
   useTodoAdd,
   useTodoFilter,
   useTodoFinish,
   useTodoRemoveFinished,
-  useTodoState
+  useTodoState,
 } from '../../state/todo/hooks'
-import { shortId } from '../../utils/gen'
-import Footer, { FooterProps } from './Footer'
-import Header, { HeaderProps } from './Header'
+import {shortId} from '../../utils/gen'
+import Footer, {FooterProps} from './Footer'
+import Header, {HeaderProps} from './Header'
 import List from './List'
 
 // -webkit- 标示删除后显示不出效果。故保留  浏览器 chrome 版本 87.0.4280.88（正式版本） (x86_64)
@@ -35,22 +35,22 @@ export default (props: TodoPageProps) => {
   const add = useTodoAdd()
   const todoFinish = useTodoFinish()
   const removeFinished = useTodoRemoveFinished()
-  const { isAllFinish } = useTodoState()
+  const {isAllFinish} = useTodoState()
   const filter = useTodoFilter()
-  const { items } = useTodoState()
+  const {items} = useTodoState()
   return (
     <Wrapper>
       <Title>{props.title ?? 'Todo List'}</Title>
       <Header
         highlightIcon={isAllFinish}
-        onInsert={value => {
+        onInsert={(value) => {
           add({
             isHover: false,
             isEdit: false,
             done: false,
             id: shortId(),
             text: value,
-            visible: true
+            visible: true,
           })
         }}
         onIconClick={() => {
@@ -58,8 +58,7 @@ export default (props: TodoPageProps) => {
           else todoFinish(true)
         }}
         selectIcon={props.selectIcon}
-        textHint={props.textHint}
-      ></Header>
+        textHint={props.textHint}></Header>
       <List items={items} />
       <Footer filter={filter} onClearFinished={removeFinished} />
     </Wrapper>

@@ -1,12 +1,12 @@
-import React, { FC, useEffect } from 'react'
+import React, {FC, useEffect} from 'react'
 import styled from 'styled-components'
 import {
   useSyncTaskProcess,
   useTodoRemove,
   useTodoResetItems,
-  useTodoUpdateItem
+  useTodoUpdateItem,
 } from '../../state/todo/hooks'
-import { supportKey } from '../../utils/keyboard'
+import {supportKey} from '../../utils/keyboard'
 
 const Text = styled.span`
   display: inline-block;
@@ -53,7 +53,7 @@ export interface ItemProps {
 export interface MenuProps {
   items: ItemProps[]
 }
-const List: FC<MenuProps> = props => {
+const List: FC<MenuProps> = (props) => {
   // console.log(++render, 'double render appears in React.Strict Mode')
 
   const updateItem = useTodoUpdateItem()
@@ -66,47 +66,43 @@ const List: FC<MenuProps> = props => {
   return (
     <TodoListUL>
       {props?.items.map(
-        item =>
+        (item) =>
           item.visible && (
             <li
               key={item.id}
               onMouseEnter={() => {
-                updateItem({ ...item, isHover: true })
+                updateItem({...item, isHover: true})
               }}
               onMouseLeave={() => {
                 console.log('mouse out inside tag li')
-                updateItem({ ...item, isHover: false })
-              }}
-            >
+                updateItem({...item, isHover: false})
+              }}>
               <ToggleTaskButton
                 onClick={() => {
-                  updateItem({ ...item, done: !item.done })
+                  updateItem({...item, done: !item.done})
                   sync()
-                }}
-              >
+                }}>
                 {item.done ? '✔️' : ''}
               </ToggleTaskButton>
               {item.isEdit ? (
                 <input
                   autoFocus
                   onBlur={() => {
-                    updateItem({ ...item, isEdit: false })
+                    updateItem({...item, isEdit: false})
                   }}
-                  onKeyUp={ev => {
-                    if (supportKey(ev.key))
-                      updateItem({ ...item, isEdit: false })
+                  onKeyUp={(ev) => {
+                    if (supportKey(ev.key)) updateItem({...item, isEdit: false})
                   }}
                   value={item.text}
-                  onChange={e => {
-                    updateItem({ ...item, text: e.target.value })
+                  onChange={(e) => {
+                    updateItem({...item, text: e.target.value})
                   }}
                 />
               ) : (
                 <Text
                   onDoubleClick={() => {
-                    updateItem({ ...item, isEdit: true })
-                  }}
-                >
+                    updateItem({...item, isEdit: true})
+                  }}>
                   {item.text}
                 </Text>
               )}
@@ -115,8 +111,7 @@ const List: FC<MenuProps> = props => {
                 <RemoveButton
                   onClick={() => {
                     removeItem(item.id)
-                  }}
-                >
+                  }}>
                   ❌
                 </RemoveButton>
               )}
