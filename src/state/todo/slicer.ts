@@ -1,13 +1,8 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
+import {TaskProgress} from '../../components/todo-list/Footer'
 import {ItemProps} from '../../components/todo-list/List'
 import {shortId, ShortUniqueId} from '../../utils/gen'
 
-// 这里有一个引用bug 无法导入 todo-list/Footer.tsx/  export enum TaskProgress
-enum TaskProgress {
-  Active = 1 << 0,
-  Finished = 1 << 1,
-  All = Active | Finished,
-}
 type SliceState = {
   isAllFinish: boolean
   items: ItemProps[]
@@ -51,7 +46,7 @@ export const todoSlice = createSlice({
     /** According to condiction set whether this record display or not */
     filter: (state, action: PayloadAction<TaskProgress>) => {
       switch (action.payload) {
-        case TaskProgress.Active:
+        case 'Active':
           state.items.forEach((item) => {
             if (!item.done) {
               item.visible = true
@@ -61,7 +56,7 @@ export const todoSlice = createSlice({
           })
           break
 
-        case TaskProgress.Finished:
+        case 'Finished':
           state.items.forEach((item) => {
             if (item.done) {
               item.visible = true
@@ -70,7 +65,7 @@ export const todoSlice = createSlice({
             }
           })
           break
-        case TaskProgress.All:
+        case 'All':
           state.items.forEach((item) => {
             item.visible = true
           })

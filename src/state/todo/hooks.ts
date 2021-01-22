@@ -24,7 +24,7 @@ export function useTodoItems() {
   return useMemo(() => list.filter((item) => !item.done), [list])
 }
 
-export function useTodoUnfnishedItems() {
+export function useTodoUnfinishedItems() {
   const list = useSelector<AppState, TodoItemProps[]>((state) => state.todo.items)
   return useMemo(() => list.filter((item) => !item.done), [list])
 }

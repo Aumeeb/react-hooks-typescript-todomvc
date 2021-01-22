@@ -1,7 +1,7 @@
 import React, {FC} from 'react'
 import styled from 'styled-components'
 import {Flex} from '..'
-import {useTodoUnfnishedItems} from '../../state/todo/hooks'
+import {useTodoUnfinishedItems} from '../../state/todo/hooks'
 import {noop} from '../../utils/noop'
 
 const FlexStyles: React.CSSProperties = {
@@ -13,39 +13,32 @@ const FlexStyles: React.CSSProperties = {
 const PlainButton = styled.span`
   cursor: pointer;
 `
-export enum TaskProgress {
-  Active = 1 << 0,
-  Finished = 1 << 1,
-  All = Active | Finished,
-}
-// export const TaskProgress ={
-
-// }
+export type TaskProgress = 'Active' | 'Finished' | 'All'
 export interface FooterProps {
   filter?: (state: TaskProgress) => void
   onClearFinished?: () => void
 }
 const Footer: FC<FooterProps> = ({filter = noop, onClearFinished = noop}) => {
-  const unfinishedItem = useTodoUnfnishedItems()
-  
+  const unfinishedItem = useTodoUnfinishedItems()
+
   return (
     <Flex style={FlexStyles}>
       <span> {unfinishedItem.length} items left</span>
       <PlainButton
         onClick={() => {
-          filter(TaskProgress.All)
+          filter('All')
         }}>
         All
       </PlainButton>
       <PlainButton
         onClick={() => {
-          filter(TaskProgress.Active)
+          filter('Active')
         }}>
         Active
       </PlainButton>
       <PlainButton
         onClick={() => {
-          filter(TaskProgress.Finished)
+          filter('Finished')
         }}>
         Finished
       </PlainButton>
